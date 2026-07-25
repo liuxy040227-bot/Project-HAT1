@@ -304,3 +304,60 @@ button:active{
     }
 
 }
+/* ===========================================
+   Opening
+=========================================== */
+
+#opening{
+
+    background:#000;
+
+    color:#fff;
+
+    z-index:100;
+
+}
+
+.opening-text{
+
+    text-align:center;
+
+    font-size:26px;
+
+    line-height:2;
+
+    opacity:0;
+
+    animation:
+
+        openingFade 4s forwards;
+
+}
+
+@keyframes openingFade{
+
+    0%{
+
+        opacity:0;
+
+    }
+
+    25%{
+
+        opacity:1;
+
+    }
+
+    75%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        opacity:0;
+
+    }
+
+}
