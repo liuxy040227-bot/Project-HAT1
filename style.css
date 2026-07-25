@@ -1,332 +1,101 @@
-/* ===========================================
-   Project-HAT
-   她和他们
-   Alpha 0.1.0
-   Developer：66
-=========================================== */
+/*
+====================================================
+Project-HAT
+游戏：《她和他们》
 
-:root{
+File: style.css
+Version: Alpha 0.1.2
+Date: 2026-07-25
+Author: 66
+====================================================
+*/
 
-    --bg1:#eef5ff;
-    --bg2:#dcecff;
-
-    --card:rgba(255,255,255,.45);
-
-    --border:rgba(255,255,255,.65);
-
-    --text:#222;
-
-    --sub:#777;
-
-    --blue:#7ea8ff;
-
-    --shadow:0 15px 40px rgba(0,0,0,.08);
-
-    --radius:26px;
-
-}
-
-*{
-
-    margin:0;
-
-    padding:0;
-
-    box-sizing:border-box;
-
-}
-
-html,body{
-
-    width:100%;
-
-    height:100%;
-
-    overflow:hidden;
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family:
-    "SF Pro Display",
-    "PingFang SC",
-    sans-serif;
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Microsoft YaHei",
+        sans-serif;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 
 }
 
-body{
-
-    background:linear-gradient(
-        180deg,
-        var(--bg1),
-        var(--bg2)
-    );
-
-}
-
-/* =========================================== */
-
-#game{
-
-    width:100vw;
-
-    height:100vh;
-
-    position:relative;
-
-}
-
-/* 背景 */
-
-#background{
-
-    position:absolute;
-
-    inset:0;
+body {
 
     background:
+        linear-gradient(
+            135deg,
+            #f8dff2,
+            #dcecff
+        );
 
-    radial-gradient(
-        circle at top,
-        rgba(255,255,255,.95),
-        transparent 65%
-    ),
-
-    linear-gradient(
-        180deg,
-        #edf5ff,
-        #d8e9ff
-    );
+    color: #333;
 
 }
 
-/* =========================================== */
 
-#screen{
+/* 页面系统 */
 
-    position:relative;
+.page {
 
-    width:100%;
+    position: absolute;
 
-    height:100%;
+    width: 100%;
+    height: 100%;
 
-}
+    display: none;
 
-/* 页面 */
+    justify-content: center;
+    align-items: center;
 
-.page{
+    opacity: 0;
 
-    position:absolute;
-
-    inset:0;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.45s ease;
-
-    padding:30px;
+    transition:
+        opacity .6s ease;
 
 }
 
-.page.active{
 
-    opacity:1;
+.page.active {
 
-    visibility:visible;
+    display: flex;
 
-}
-
-/* =========================================== */
-
-.logo{
-
-    text-align:center;
-
-    animation:fadeUp .8s ease;
+    opacity: 1;
 
 }
 
-.logo h1{
 
-    font-size:60px;
+/* 开场 */
 
-    font-weight:700;
+#opening {
 
-    color:var(--text);
+    background: #000;
 
-}
-
-.logo h2{
-
-    margin-top:12px;
-
-    color:var(--sub);
-
-    font-size:22px;
-
-    font-weight:400;
+    color: white;
 
 }
 
-.author{
 
-    margin-top:24px;
+.opening-text {
 
-    color:#999;
+    text-align: center;
 
-}
+    font-size: 24px;
 
-.card{
+    line-height: 2;
 
-    width:min(520px,100%);
-
-    padding:36px;
-
-    border-radius:var(--radius);
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-    backdrop-filter:blur(25px);
-
-    -webkit-backdrop-filter:blur(25px);
-
-    box-shadow:var(--shadow);
-
-    animation:fadeUp .5s ease;
-
-}
-
-.card h2{
-
-    margin-bottom:22px;
-
-    font-size:28px;
-
-}
-
-.card p{
-
-    margin:14px 0;
-
-    line-height:1.8;
-
-    color:#444;
-
-}
-
-/* =========================================== */
-
-button{
-
-    margin-top:30px;
-
-    width:100%;
-
-    height:54px;
-
-    border:none;
-
-    border-radius:18px;
-
-    background:var(--blue);
-
-    color:#fff;
-
-    font-size:18px;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-button:hover{
-
-    transform:translateY(-2px);
-
-}
-
-button:active{
-
-    transform:scale(.98);
-
-}
-
-/* =========================================== */
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(25px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-/* 手机适配 */
-
-@media (max-width:768px){
-
-    .logo h1{
-
-        font-size:44px;
-
-    }
-
-    .logo h2{
-
-        font-size:18px;
-
-    }
-
-    .card{
-
-        padding:28px;
-
-    }
-
-}
-/* ===========================================
-   Opening
-=========================================== */
-
-#opening{
-
-    background:#000;
-
-    color:#fff;
-
-    z-index:100;
-
-}
-
-.opening-text{
-
-    text-align:center;
-
-    font-size:26px;
-
-    line-height:2;
-
-    opacity:0;
+    padding: 30px;
 
     animation:
 
@@ -334,30 +103,176 @@ button:active{
 
 }
 
-@keyframes openingFade{
 
-    0%{
+@keyframes openingFade {
 
-        opacity:0;
+    0% {
 
-    }
-
-    25%{
-
-        opacity:1;
+        opacity: 0;
 
     }
 
-    75%{
 
-        opacity:1;
+    25% {
+
+        opacity: 1;
+
+    }
+
+
+    75% {
+
+        opacity: 1;
 
     }
 
-    100%{
 
-        opacity:0;
+    100% {
+
+        opacity: 0;
 
     }
+
+}
+
+
+
+/* 主界面玻璃效果 */
+
+.glass {
+
+    width: 85%;
+
+    max-width: 420px;
+
+    padding: 40px 30px;
+
+    border-radius: 30px;
+
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .35
+        );
+
+
+    backdrop-filter:
+
+        blur(20px);
+
+
+    box-shadow:
+
+        0 20px 60px
+        rgba(
+            0,
+            0,
+            0,
+            .15
+        );
+
+
+    text-align: center;
+
+}
+
+
+/* 标题 */
+
+.title {
+
+    font-size: 42px;
+
+    letter-spacing: 5px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.subtitle {
+
+    font-size: 15px;
+
+    opacity: .7;
+
+    margin-bottom: 35px;
+
+}
+
+
+
+/* 按钮 */
+
+button {
+
+    border: none;
+
+    outline: none;
+
+    padding:
+
+        14px 40px;
+
+
+    border-radius: 999px;
+
+
+    background:
+
+        rgba(
+            255,
+            255,
+            255,
+            .7
+        );
+
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+
+    transition:
+
+        .3s;
+
+}
+
+
+
+button:hover {
+
+    transform:
+
+        translateY(-3px);
+
+
+}
+
+
+
+/* 手机适配 */
+
+@media(max-width:600px){
+
+
+    .title {
+
+        font-size: 34px;
+
+    }
+
+
+    .opening-text {
+
+        font-size: 20px;
+
+    }
+
 
 }
