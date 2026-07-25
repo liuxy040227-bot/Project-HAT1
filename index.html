@@ -1,138 +1,486 @@
+<!--
+Project-HAT
+Game: 她和他们
+File: index.html
+Version: Alpha 0.1.2
+Date: 2026-07-25
+Author: 66
+-->
+
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>她和他们 - Project-HAT</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+<style>
+*{
+    box-sizing:border-box;
+    font-family:"Microsoft YaHei",sans-serif;
+}
 
-    <title>她和他们 · Her And Them</title>
+body{
+    margin:0;
+    min-height:100vh;
+    background:
+    linear-gradient(
+        rgba(255,255,255,.35),
+        rgba(255,255,255,.35)
+    ),
+    url("assets/background.jpg")
+    center/cover fixed;
+    color:#333;
+}
 
-    <meta
-        name="theme-color"
-        content="#eef4ff"
-    >
+#app{
+    width:100%;
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+.glass{
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(18px);
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.7);
+    box-shadow:0 10px 35px rgba(0,0,0,.12);
+}
+
+header{
+    padding:30px;
+    text-align:center;
+}
+
+.logo{
+    font-size:42px;
+    font-weight:bold;
+    letter-spacing:8px;
+}
+
+.subtitle{
+    margin-top:10px;
+    opacity:.7;
+}
+
+button{
+    border:none;
+    padding:12px 22px;
+    border-radius:20px;
+    background:#fff;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+.page{
+    margin-top:20px;
+    padding:25px;
+}
+
+.hidden{
+    display:none;
+}
+
+
+.notice{
+    line-height:1.8;
+    font-size:15px;
+}
+
+
+.character-list{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(150px,1fr));
+    gap:15px;
+}
+
+
+.character{
+    padding:18px;
+    text-align:center;
+}
+
+
+.avatar{
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#eee;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+}
+
+
+.status{
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:20px;
+}
+
+
+.phone{
+    padding:20px;
+}
+
+
+.message{
+    background:white;
+    padding:12px;
+    border-radius:15px;
+    margin:8px 0;
+}
+
+
+footer{
+    text-align:center;
+    padding:20px;
+    opacity:.6;
+}
+</style>
 
 </head>
 
 <body>
 
-    <!-- 游戏根节点 -->
-    <div id="game">
+<div id="app">
 
-        <!-- 背景 -->
-        <div id="background"></div>
+<header class="glass">
 
-        <!-- 页面容器 -->
-        <!-- Opening -->
+<div class="logo">
+她和他们
+</div>
 
-<section id="opening" class="page active">
+<div class="subtitle">
+Project-HAT · Modern Urban Group Simulator
+</div>
 
-    <div class="opening-text">
+<br>
 
-        青春从来不是一条固定的路。
+<button onclick="startGame()">
+开始游戏
+</button>
 
-        <br><br>
+</header>
 
-        而是那些陪你一起走过的人。
 
-    </div>
+<section id="intro" class="glass page">
+
+<h2>作者的话</h2>
+
+<div class="notice">
+
+欢迎来到《她和他们》。
+
+这是一个关于大学生活、
+友情、
+成长、
+选择、
+误会、
+羁绊与相遇的群像故事。
+
+游戏作者：
+
+<b>66</b>
+
+<br><br>
+
+本作品为架空互动作品。
+
+角色设定经过艺术加工，
+请以游戏世界观体验。
+
+</div>
 
 </section>
-        <main id="screen">
 
-            <!-- Boot 页面 -->
-           <section id="boot" class="page">
 
-                <div class="logo">
 
-                    <h1>她和他们</h1>
+<section id="game" class="glass page hidden">
 
-                    <h2>Her And Them</h2>
 
-                    <p class="author">
-                        by 66
-                    </p>
+<div class="status">
 
-                    <button id="enterBtn">
+<div>
+时间：
+<span id="time">
+大一开学第一天
+</span>
+</div>
 
-                        点击进入
+<div>
+心情：
+<span id="mood">
+普通
+</span>
+</div>
 
-                    </button>
+<div>
+关系：
+<span id="relation">
+0
+</span>
+</div>
 
-                </div>
+</div>
 
-            </section>
 
-            <!-- 作者声明 -->
-            <section id="statement" class="page">
 
-                <div class="card">
+<h2>
+校园人物
+</h2>
 
-                    <h2>作者声明</h2>
 
-                    <p>
-                        欢迎来到《她和他们》。
-                    </p>
+<div class="character-list">
 
-                    <p>
-                        本作品为原创校园生活模拟游戏。
-                    </p>
 
-                    <p>
-                        游戏中的故事、校园与事件均为原创设定。
-                    </p>
+<div class="glass character">
 
-                    <button id="statementNext">
-                        下一步
-                    </button>
+<div class="avatar">
+官
+</div>
 
-                </div>
+<h3>
+官俊臣
+</h3>
 
-            </section>
+<p>
+未知关系
+</p>
 
-            <!-- 作者的话 -->
-            <section id="author" class="page">
+<button onclick="meet('官俊臣')">
+认识
+</button>
 
-                <div class="card">
+</div>
 
-                    <h2>作者的话</h2>
 
-                    <p>
-                        你好，我是66。
-                    </p>
 
-                    <p>
-                        谢谢你来到这里。
-                    </p>
+<div class="glass character">
 
-                    <p>
-                        希望《她和他们》能陪你度过一段温暖的时光。
-                    </p>
+<div class="avatar">
+张
+</div>
 
-                    <button id="authorNext">
-                        开始游戏
-                    </button>
+<h3>
+张桂源
+</h3>
 
-                </div>
+<p>
+未知关系
+</p>
 
-            </section>
+<button onclick="meet('张桂源')">
+认识
+</button>
 
-        </main>
+</div>
 
-    </div>
 
-    <script src="script.js"></script>
+
+
+<div class="glass character">
+
+<div class="avatar">
+函
+</div>
+
+<h3>
+张函瑞
+</h3>
+
+<p>
+未知关系
+</p>
+
+<button onclick="meet('张函瑞')">
+认识
+</button>
+
+</div>
+
+
+
+<div class="glass character">
+
+<div class="avatar">
+王
+</div>
+
+<h3>
+王橹杰
+</h3>
+
+<p>
+未知关系
+</p>
+
+<button onclick="meet('王橹杰')">
+认识
+</button>
+
+</div>
+
+
+
+<div class="glass character">
+
+<div class="avatar">
+左
+</div>
+
+<h3>
+左奇函
+</h3>
+
+<p>
+未知关系
+</p>
+
+<button onclick="meet('左奇函')">
+认识
+</button>
+
+</div>
+
+
+
+<div class="glass character">
+
+<div class="avatar">
+陈
+</div>
+
+<h3>
+陈奕恒
+</h3>
+
+<p>
+未知关系
+</p>
+
+<button onclick="meet('陈奕恒')">
+认识
+</button>
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+<section id="phone" class="glass page hidden">
+
+<h2>
+手机
+</h2>
+
+<div class="phone">
+
+<div class="message">
+📱 新消息：
+<br>
+你的大学生活开始了。
+</div>
+
+
+<div class="message">
+购物：
+暂无订单
+</div>
+
+
+<div class="message">
+外卖：
+暂无记录
+</div>
+
+
+<div class="message">
+社交平台：
+已解锁
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+<footer>
+Project-HAT Alpha 0.1.2 · Created by 66
+</footer>
+
+
+</div>
+
+
+
+<script>
+
+let relation = 0;
+
+
+function startGame(){
+
+document
+.getElementById("intro")
+.classList.add("hidden");
+
+
+document
+.getElementById("game")
+.classList.remove("hidden");
+
+
+document
+.getElementById("phone")
+.classList.remove("hidden");
+
+}
+
+
+
+function meet(name){
+
+relation++;
+
+document
+.getElementById("relation")
+.innerText = relation;
+
+
+document
+.getElementById("mood")
+.innerText="认识了 "+name;
+
+
+alert(
+"你与 "+name+" 的故事开始了。"
+);
+
+}
+
+</script>
+
 
 </body>
-
 </html>
