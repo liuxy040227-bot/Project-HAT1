@@ -1,13 +1,10 @@
 /*
 ====================================================
-
 Project-HAT
 她和他们
 
-Version : Alpha 0.1.0
-
+Version : Alpha 0.1.1
 Developer : 66
-
 ====================================================
 */
 
@@ -15,67 +12,119 @@ Developer : 66
 
 const Game = {
 
-    current: "boot",
+    version: "0.1.1",
+
+    currentScene: "boot",
 
     init() {
 
-        this.bindEvents();
+        console.log(`Project-HAT ${this.version}`);
+
+        this.Scene.init();
 
     },
 
-    bindEvents() {
+    Scene: {
 
-        document
-            .getElementById("enterBtn")
-            ?.addEventListener("click", () => {
+        init() {
 
-                this.changePage("statement");
+            this.bind();
 
-            });
+            this.open("boot");
 
-        document
-            .getElementById("statementNext")
-            ?.addEventListener("click", () => {
+        },
 
-                this.changePage("author");
+        bind() {
 
-            });
+            document
+                .getElementById("enterBtn")
+                ?.addEventListener("click", () => {
 
-        document
-            .getElementById("authorNext")
-            ?.addEventListener("click", () => {
+                    this.open("statement");
 
-                this.startGame();
+                });
 
-            });
+            document
+                .getElementById("statementNext")
+                ?.addEventListener("click", () => {
 
-    },
+                    this.open("author");
 
-    changePage(next) {
+                });
 
-        const currentPage = document.getElementById(this.current);
+            document
+                .getElementById("authorNext")
+                ?.addEventListener("click", () => {
 
-        if(currentPage){
+                    Game.start();
 
-            currentPage.classList.remove("active");
+                });
+
+        },
+
+        open(id) {
+
+            document
+                .querySelectorAll(".page")
+                .forEach(page => {
+
+                    page.classList.remove("active");
+
+                });
+
+            const page = document.getElementById(id);
+
+            if (page) {
+
+                page.classList.add("active");
+
+                Game.currentScene = id;
+
+            }
 
         }
 
-        const nextPage = document.getElementById(next);
+    },
 
-        if(nextPage){
+    UI: {
 
-            nextPage.classList.add("active");
+        message(text) {
+
+            console.log(text);
 
         }
 
-        this.current = next;
+    },
+
+    Audio: {
+
+        play(name) {
+
+            console.log("Play:", name);
+
+        }
 
     },
 
-    startGame(){
+    Storage: {
 
-        alert("欢迎来到《她和他们》Alpha 0.1");
+        save() {
+
+            console.log("Save");
+
+        },
+
+        load() {
+
+            console.log("Load");
+
+        }
+
+    },
+
+    start() {
+
+        alert("欢迎来到《她和他们》！\n\nAlpha 0.1.1");
 
     }
 
